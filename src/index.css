@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.contenedor {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  grid-auto-rows: minmax(min-content, max-content);
+  margin: 70px auto;
+  background: #ececec; 
+  width:fit-content;
+  min-width: 500px;
+  min-height: 500px;
+}
+
+.nombre, .apellido, .apodo {
+  background: #fff;
+  font-size: 15px;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  margin: 10px;
+}
+
+.button_envar, .button_limpiar {
+  background-color: #555555;
+  color: #ececec;
+  margin: 10px;
+  transition-duration: 0.4s;
+}
+
+.button_enviar:hover, .button_limpiar:hover {
+  background-color: white;
+  color: black;
+}

@@ -1,74 +1,67 @@
 import { useState } from 'react';
+import { Datos_Mostrar } from './Components/Datos_Mostrar';
 
 export const Examen = () => {
 
   const [datos, setDatos] = useState({
     nombre: '',
-    edad: '',
+    apellido: '',
     apodo: ''
   })
 
-  function agregarNombre(e) {
-    setDatos((valores) => ({
-      ...valores,
-      nombre: e.target.value,
-    }))
+   const agregarDatos = (e) => {
+    console.log(e.target.value)
+    setDatos({
+      ...datos,
+      [e.target.name]: e.target.value,
+    })
   }
 
-  function agregarApellido(e) {
-    setDatos((valores) => ({
-      ...valores,
-      apellido: e.target.value,
-    }))
-  }
-
-  function agregarApodo(e) {
-    setDatos((valores) => ({
-      ...valores,
-      apodo: e.target.value,
-    }))
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Dato cargado ' + datos.nombre + ' ' 
-      +datos.apellido + ' ' 
-      +datos.apodo);
+    console.log(datos.nombre+" "+datos.apellido+" "+datos.apodo+" " + datos.done)
+    setDatos('')
   }
+
+   const Limpiar = (e) => {
+    document.getElementById("Datos_form").reset()
+  }
+
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>Nombre:
+    <div className='contenedor'>
+      <form onSubmit={handleSubmit} id='Datos_form'>
+        <div className='nombre'>Nombre:
+          <input 
+            type="text"
+            name='nombre' 
+            onChange={agregarDatos} />
+        </div>
+        <div className='apellido'>Apellido:
           <input 
             type="text" 
-            value={datos.nombre} 
-            onChange={agregarNombre} />
+            name='apellido'
+            onChange={agregarDatos} />
         </div>
-        <div>Apellido:
-          <input 
-            type="text" 
-            value={datos.apellido} 
-            onChange={agregarApellido} />
+        <div className='apodo'>Apodo:
+            <input type="text"
+            name='apodo' 
+            onChange={agregarDatos} />
         </div>
-        <div>Apodo
-            <input type="text" 
-            value={datos.apodo} 
-            onChange={agregarApodo} />
-        </div>
-      </form>
-      <button
-            className="button_add"
-            type='submit'
-            disabled={(datos.nombre && datos.apellido && datos.apodo) ? "" : "disabled"} //Si descripción no tiene valor se deshabilita, si lo tiene lo habilita
+        <button
+            className="button_enviar"
+            disabled={(datos.nombre && datos.apellido && datos.apodo) ? "" : "disabled"}
           >
-            Agregar
-          </button>
-      <hr />
-      <h3>Datos</h3>
-      <div>Nombre:{datos.nombre}</div>
-      <div>Apellido:{datos.apellido}</div>
-      <div>Apodo:{datos.apodo}</div>
+            Enviar
+        </button>
+        <button
+            className="button_limpiar"
+            onClick={Limpiar}
+          >
+            Limpiar
+        </button>
+      </form>
+      <Datos_Mostrar datos={datos}></Datos_Mostrar>
     </div>
   );
 }
